@@ -1,0 +1,885 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Dashboard - Mazer Admin Dashboard</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+      tailwind.config = {
+        theme: {
+          extend: {
+            maxWidth: {
+              "sm-p": "540px",
+              "md-p": "720px",
+              "lg-p": "960px",
+              "xl-p": "1140px",
+              "xxl-p": "1320px",
+            },
+          },
+          screens: {
+            sm: "576px",
+            md: "768px",
+            lg: "992px",
+            xl: "1200px",
+            xxl: "1400px",
+            mod: "1190px",
+          },
+        },
+      };
+    </script>
+    <link rel="stylesheet" href="elementos/elementos.css" />
+    <link
+      rel="shortcut icon"
+      href="elementos/herramientas/images/logo/favicon.svg"
+      type="image/x-icon"
+    />
+    <link
+      rel="shortcut icon"
+      href="elementos/herramientas/images/logo/favicon.png"
+      type="image/png"
+    />
+    <script src="
+    https://cdn.jsdelivr.net/npm/@preline/preline@1.0.0/dist/hs-ui.bundle.min.js
+    "></script>
+  </head>
+
+  <body>
+    <div id="app">
+      <div id="sidebar" class="active fixed z-50">
+        <div class="sidebar-wrapper active entrada">
+          <div class="sidebar-header relative">
+            <div class="flex w-60 mt-3 mb-2 items-center">
+              <div class="logo">
+                <a href="index.html"
+                  ><img
+                    src="elementos/herramientas/images/logo/logo.svg"
+                    alt="Logo"
+                /></a>
+              </div>
+
+              <div class="flex gap-2 items-center mt-1">
+                <svg
+                  xmlns="http://www.w3.org/2000/svg"
+                  xmlns:xlink="http://www.w3.org/1999/xlink"
+                  aria-hidden="true"
+                  role="img"
+                  class="ml-14 textoSidebar iconify iconify--system-uicons"
+                  width="20"
+                  height="22"
+                  preserveAspectRatio="xMidYMid meet"
+                  viewBox="0 0 21 21"
+                >
+                  <g
+                    fill="none"
+                    fill-rule="evenodd"
+                    stroke="currentColor"
+                    stroke-linecap="round"
+                    stroke-linejoin="round"
+                  >
+                    <path
+                      d="M10.5 14.5c2.219 0 4-1.763 4-3.982a4.003 4.003 0 0 0-4-4.018c-2.219 0-4 1.781-4 4c0 2.219 1.781 4 4 4zM4.136 4.136L5.55 5.55m9.9 9.9l1.414 1.414M1.5 10.5h2m14 0h2M4.135 16.863L5.55 15.45m9.899-9.9l1.414-1.415M10.5 19.5v-2m0-14v-2"
+                      opacity=".3"
+                    ></path>
+                    <g transform="translate(-210 -1)">
+                      <path d="M220.5 2.5v2m6.5.5l-1.5 1.5"></path>
+                      <circle cx="220.5" cy="11.5" r="4"></circle>
+                      <path
+                        d="m214 5l1.5 1.5m5 14v-2m6.5-.5l-1.5-1.5M214 18l1.5-1.5m-4-5h2m14 0h2"
+                      ></path>
+                    </g>
+                  </g>
+                </svg>
+
+                <div
+                  class="relative block mb-2 mt-2 form-switch fs-6"
+                  id="theme-toggle"
+                >
+                  <div id="toggle-button" onclick="toggleTheme()">
+                    <div id="sun-moon" class="sun"></div>
+                  </div>
+                </div>
+
+                <svg
+                  xmlns="http://www.w3.org/2000/svg"
+                  xmlns:xlink="http://www.w3.org/1999/xlink"
+                  aria-hidden="true"
+                  role="img"
+                  class="ml-2 textoSidebar iconify iconify--mdd"
+                  width="20"
+                  height="20"
+                  preserveAspectRatio="xMidYMid meet"
+                  viewBox="0 0 24 24"
+                >
+                  <path
+                    fill="#607080"
+                    d="m17.75 4.09l-2.53 1.94l.91 3.06l-2.63-1.81l-2.63 1.81l.91-3.06l-2.53-1.94L12.44 4l1.06-3l1.06 3l3.19.09m3.5 6.91l-1.64 1.25l.59 1.98l-1.7-1.17l-1.7 1.17l.59-1.98L15.75 11l2.06-.05L18.5 9l.69 1.95l2.06.05m-2.28 4.95c.83-.08 1.72 1.1 1.19 1.85c-.32.45-.66.87-1.08 1.27C15.17 23 8.84 23 4.94 19.07c-3.91-3.9-3.91-10.24 0-14.14c.4-.4.82-.76 1.27-1.08c.75-.53 1.93.36 1.85 1.19c-.27 2.86.69 5.83 2.89 8.02a9.96 9.96 0 0 0 8.02 2.89m-1.64 2.02a12.08 12.08 0 0 1-7.8-3.47c-2.17-2.19-3.33-5-3.49-7.82c-2.81 3.14-2.7 7.96.31 10.98c3.02 3.01 7.84 3.12 10.98.31Z"
+                  ></path>
+                </svg>
+              </div>
+
+              <button
+                id="sidebar-hide"
+                class="sidebar-hide absolute textoSidebar top-2 right-2 bg-color-transparent border-none p-0 xl:hidden xxl:hidden"
+              >
+                <svg class="bi" width="25" height="40" fill="currentColor">
+                  <use xlink:href="elementos/herramientas/images/icons.svg#x" />
+                </svg>
+              </button>
+            </div>
+          </div>
+
+          <div class="sidebar-menu">
+            <ul class="menu">
+              <li class="sidebar-title textoSidebar">Menu</li>
+              <li class="sidebar-item active">
+                <a href="index.html" class="sidebar-link">
+                  <svg class="bi" width="15" height="40" fill="currentColor">
+                    <use
+                      xlink:href="elementos/herramientas/images/icons.svg#grid-fill"
+                    />
+                  </svg>
+                  <span class="textoSidebar">Dashboard</span>
+                </a>
+              </li>
+
+              <li class="w-60 sidebar-item has-sub">
+                <a href="#" class="sidebar-link">
+                  <svg class="bi" width="15" height="40" fill="currentColor">
+                    <use
+                      xlink:href="elementos/herramientas/images/icons.svg#stack"
+                    />
+                  </svg>
+                  <span class="textoSidebar">Components</span>
+                </a>
+                <ul class="submenu textoSidebar ml-8">
+                  <li class="submenu-item">
+                    <a href="components/component-accordion.html">Accordion</a>
+                  </li>
+                  <li class="submenu-item">
+                    <a href="components/component-alert.html">Alert</a>
+                  </li>
+                  <li class="submenu-item">
+                    <a href="components/component-badge.html">Badge</a>
+                  </li>
+                  <li class="submenu-item">
+                    <a href="components/component-breadcrumb.html"
+                      >Breadcrumb</a
+                    >
+                  </li>
+                  <li class="submenu-item">
+                    <a href="components/component-button.html">Button</a>
+                  </li>
+                  <li class="submenu-item">
+                    <a href="components/component-card.html">Card</a>
+                  </li>
+                  <li class="submenu-item">
+                    <a href="components/component-carousel.html">Carousel</a>
+                  </li>
+                  <li class="submenu-item">
+                    <a href="components/component-collapse.html">Collapse</a>
+                  </li>
+                  <li class="submenu-item">
+                    <a href="components/component-dropdown.html">Dropdown</a>
+                  </li>
+                  <li class="submenu-item">
+                    <a href="components/component-list-group.html"
+                      >List Group</a
+                    >
+                  </li>
+                  <li class="submenu-item">
+                    <a href="components/component-modal.html">Modal</a>
+                  </li>
+                  <li class="submenu-item">
+                    <a href="components/component-navs.html">Navs</a>
+                  </li>
+                  <li class="submenu-item">
+                    <a href="components/component-pagination.html"
+                      >Pagination</a
+                    >
+                  </li>
+                  <li class="submenu-item">
+                    <a href="components/component-progress.html">Progress</a>
+                  </li>
+                  <li class="submenu-item">
+                    <a href="components/component-spinner.html">Spinner</a>
+                  </li>
+                  <li class="submenu-item">
+                    <a href="components/component-toasts.html">Toasts</a>
+                  </li>
+                  <li class="submenu-item">
+                    <a href="components/component-tooltip.html">Tooltip</a>
+                  </li>
+                </ul>
+              </li>
+
+              <li class="sidebar-item mb-4">
+                <span class="ml-4 textoSidebar">Pages</span>
+              </li>
+
+              <li class="w-60 sidebar-item">
+                <a
+                  href="email-application/pages-email.html"
+                  class="sidebar-link"
+                >
+                  <svg class="bi" width="15" height="40" fill="currentColor">
+                    <use
+                      xlink:href="elementos/herramientas/images/icons.svg#envelope-fill"
+                    />
+                  </svg>
+                  <span class="textoSidebar">Email Application</span>
+                </a>
+              </li>
+
+              <li class="w-60 sidebar-item">
+                <a href="chat-application/pages-chat.html" class="sidebar-link">
+                  <svg class="bi" width="15" height="40" fill="currentColor">
+                    <use
+                      xlink:href="elementos/herramientas/images/icons.svg#chat-dots-fill"
+                    />
+                  </svg>
+                  <span class="textoSidebar">Chat Application</span>
+                </a>
+                <ul class="submenu textoSidebar ml-8"></ul>
+              </li>
+
+              <li class="w-60 sidebar-item">
+                <a href="photo-gallery/pages-photo.html" class="sidebar-link">
+                  <svg class="bi" width="15" height="40" fill="currentColor">
+                    <use
+                      xlink:href="elementos/herramientas/images/icons.svg#image-fill"
+                    />
+                  </svg>
+                  <span class="textoSidebar">Photo Gallery</span>
+                </a>
+              </li>
+
+              <li class="w-60 sidebar-item">
+                <a
+                  href="checkout-page/pages-checkout.html"
+                  class="sidebar-link"
+                >
+                  <svg class="bi" width="15" height="40" fill="currentColor">
+                    <use
+                      xlink:href="elementos/herramientas/images/icons.svg#basket-fill"
+                    />
+                  </svg>
+                  <span class="textoSidebar">Checkout Page</span>
+                </a>
+              </li>
+
+              <li class="w-60 sidebar-item has-sub">
+                <a href="#" class="sidebar-link">
+                  <svg class="bi" width="15" height="40" fill="currentColor">
+                    <use
+                      xlink:href="elementos/herramientas/images/icons.svg#person-badge-fill"
+                    />
+                  </svg>
+                  <span class="textoSidebar">Authentication</span>
+                </a>
+                <ul class="submenu textoSidebar ml-8">
+                  <li class="submenu-item">
+                    <a href="auth/auth-login.html">Login</a>
+                  </li>
+                  <li class="submenu-item">
+                    <a href="auth/auth-register.html">Register</a>
+                  </li>
+                  <li class="submenu-item">
+                    <a href="auth/auth-forgot-password.html">Forgot Password</a>
+                  </li>
+                </ul>
+              </li>
+
+              <li class="w-60 sidebar-item has-sub mb-6">
+                <a href="#" class="sidebar-link">
+                  <svg class="bi" width="15" height="40" fill="currentColor">
+                    <use
+                      xlink:href="elementos/herramientas/images/icons.svg#x-octagon-fill"
+                    />
+                  </svg>
+                  <span class="textoSidebar">Errors</span>
+                </a>
+                <ul class="submenu textoSidebar ml-8">
+                  <li class="submenu-item">
+                    <a href="errors/error-403.html">403</a>
+                  </li>
+                  <li class="submenu-item">
+                    <a href="errors/error-404.html">404</a>
+                  </li>
+                  <li class="submenu-item">
+                    <a href="errors/error-500.html">500</a>
+                  </li>
+                </ul>
+              </li>
+            </ul>
+          </div>
+        </div>
+      </div>
+
+      <div id="main" class="ml-4 xl:ml-80">
+        <button id="sidebar-toggle" class="rounded mb-3 xl:hidden xxl:hidden">
+          <svg class="bi svg-color w-6 h-6" height="100%" width="100%">
+            <use xlink:href="elementos/herramientas/images/icons.svg#justify" />
+          </svg>
+        </button>
+
+        <div>
+          <h3 class="text-2xl xl:text-3xl xxl:text-3xl leading-5 mb-4 log">
+            Profile Statistics
+          </h3>
+        </div>
+        <div class="pt-4">
+          <section class="row">
+            <div class="col-12 col-lg-9">
+              <div class="row">
+                <div class="col-6 col-lg-3 col-md-6">
+                  <div class="card mb-9">
+                    <div class="card-body py-8-important">
+                      <div class="row">
+                        <div
+                          class="col-md-4 col-lg-12 col-xl-12 col-xxl-5 flex justify-start px-3-important"
+                        >
+                          <div class="stats-icon purple mb-2">
+                            <svg
+                              xmlns="http://www.w3.org/2000/svg"
+                              fill="none"
+                              viewBox="0 0 24 24"
+                              stroke-width="1.5"
+                              stroke="currentColor"
+                              class="w-6 h-6"
+                            >
+                              <path
+                                stroke-linecap="round"
+                                stroke-linejoin="round"
+                                d="M2.036 12.322a1.012 1.012 0 010-.639C3.423 7.51 7.36 4.5 12 4.5c4.638 0 8.573 3.007 9.963 7.178.07.207.07.431 0 .639C20.577 16.49 16.64 19.5 12 19.5c-4.638 0-8.573-3.007-9.963-7.178z"
+                              />
+                              <path
+                                stroke-linecap="round"
+                                stroke-linejoin="round"
+                                d="M15 12a3 3 0 11-6 0 3 3 0 016 0z"
+                              />
+                            </svg>
+                          </div>
+                        </div>
+                        <div class="col-md-8-2 col-lg-12 col-xl-12 col-xxl-7">
+                          <h6 class="text-muted font-semibold">
+                            Profile Views
+                          </h6>
+                          <h6 class="font-extrabold mb-0 log">112.000</h6>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+                <div class="col-6 col-lg-3 col-md-6">
+                  <div class="card mb-9">
+                    <div class="card-body py-8-important">
+                      <div class="row">
+                        <div
+                          class="col-md-4 col-lg-12 col-xl-12 col-xxl-5 flex justify-start px-3-important"
+                        >
+                          <div class="stats-icon blue mb-2">
+                            <svg
+                              xmlns="http://www.w3.org/2000/svg"
+                              fill="none"
+                              viewBox="0 0 24 24"
+                              stroke-width="1.5"
+                              stroke="currentColor"
+                              class="w-6 h-6"
+                            >
+                              <path
+                                stroke-linecap="round"
+                                stroke-linejoin="round"
+                                d="M15.75 6a3.75 3.75 0 11-7.5 0 3.75 3.75 0 017.5 0zM4.501 20.118a7.5 7.5 0 0114.998 0A17.933 17.933 0 0112 21.75c-2.676 0-5.216-.584-7.499-1.632z"
+                              />
+                            </svg>
+                          </div>
+                        </div>
+                        <div class="col-md-8-2 col-lg-12 col-xl-12 col-xxl-7">
+                          <h6 class="text-muted font-semibold">Followers</h6>
+                          <h6 class="font-extrabold mb-0 log">183.000</h6>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+                <div class="col-6 col-lg-3 col-md-6">
+                  <div class="card mb-9">
+                    <div class="card-body py-8-important">
+                      <div class="row">
+                        <div
+                          class="col-md-4 col-lg-12 col-xl-12 col-xxl-5 flex justify-start px-3-important"
+                        >
+                          <div class="stats-icon green mb-2">
+                            <svg
+                              xmlns="http://www.w3.org/2000/svg"
+                              fill="none"
+                              viewBox="0 0 24 24"
+                              stroke-width="1.5"
+                              stroke="currentColor"
+                              class="w-6 h-6"
+                            >
+                              <path
+                                stroke-linecap="round"
+                                stroke-linejoin="round"
+                                d="M19 7.5v3m0 0v3m0-3h3m-3 0h-3m-2.25-4.125a3.375 3.375 0 11-6.75 0 3.375 3.375 0 016.75 0zM4 19.235v-.11a6.375 6.375 0 0112.75 0v.109A12.318 12.318 0 0110.374 21c-2.331 0-4.512-.645-6.374-1.766z"
+                              />
+                            </svg>
+                          </div>
+                        </div>
+                        <div class="col-md-8-2 col-lg-12 col-xl-12 col-xxl-7">
+                          <h6 class="text-muted font-semibold">Following</h6>
+                          <h6 class="font-extrabold mb-0 log">80.000</h6>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+                <div class="col-6 col-lg-3 col-md-6">
+                  <div class="card mb-9">
+                    <div class="card-body py-8-important">
+                      <div class="row">
+                        <div
+                          class="col-md-4 col-lg-12 col-xl-12 col-xxl-5 flex justify-start px-3-important"
+                        >
+                          <div class="stats-icon red mb-2">
+                            <svg
+                              xmlns="http://www.w3.org/2000/svg"
+                              fill="none"
+                              viewBox="0 0 24 24"
+                              stroke-width="1.5"
+                              stroke="currentColor"
+                              class="w-6 h-6"
+                            >
+                              <path
+                                stroke-linecap="round"
+                                stroke-linejoin="round"
+                                d="M17.593 3.322c1.1.128 1.907 1.077 1.907 2.185V21L12 17.25 4.5 21V5.507c0-1.108.806-2.057 1.907-2.185a48.507 48.507 0 0111.186 0z"
+                              />
+                            </svg>
+                          </div>
+                        </div>
+                        <div class="col-md-8-2 col-lg-12 col-xl-12 col-xxl-7">
+                          <h6 class="text-muted font-semibold">Saved Post</h6>
+                          <h6 class="font-extrabold mb-0 log">112</h6>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+              <div class="row">
+                <div class="col-12">
+                  <div class="card mb-9">
+                    <div class="card-header">
+                      <h4 class="text-xl font-bold mb-4 log">Profile Visit</h4>
+                    </div>
+                    <div class="card-body">
+                      <div id="chart-profile-visit"></div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+              <div class="row">
+                <div class="col-12 col-xl-4">
+                  <div class="card mb-9">
+                    <div class="card-header">
+                      <h4 class="text-xl font-bold mb-2 log">Profile Visit</h4>
+                    </div>
+                    <div class="card-body">
+                      <div class="row">
+                        <div class="col-7">
+                          <div class="flex items-center">
+                            <svg
+                              class="text-color-primary"
+                              width="32"
+                              height="32"
+                              fill="blue"
+                              style="width: 10px"
+                            >
+                              <use
+                                xlink:href="elementos/herramientas/images/bootstrap-icons.svg#circle-fill"
+                              />
+                            </svg>
+                            <h5 class="mb-0 ms-3 text-xl font-bold log">
+                              Europe
+                            </h5>
+                          </div>
+                        </div>
+                        <div class="col-5">
+                          <h5 class="mb-0 text-end text-xl font-bold log">
+                            862
+                          </h5>
+                        </div>
+                        <div class="col-12">
+                          <div id="chart-europe"></div>
+                        </div>
+                      </div>
+                      <div class="row">
+                        <div class="col-7">
+                          <div class="flex items-center">
+                            <svg
+                              class="bi text-color-success"
+                              width="32"
+                              height="32"
+                              fill="blue"
+                              style="width: 10px"
+                            >
+                              <use
+                                xlink:href="elementos/herramientas/images/bootstrap-icons.svg#circle-fill"
+                              />
+                            </svg>
+                            <h5 class="mb-0 ms-3 text-xl font-bold log">
+                              America
+                            </h5>
+                          </div>
+                        </div>
+                        <div class="col-5">
+                          <h5 class="mb-0 text-end text-xl font-bold log">
+                            375
+                          </h5>
+                        </div>
+                        <div class="col-12">
+                          <div id="chart-america"></div>
+                        </div>
+                      </div>
+                      <div class="row">
+                        <div class="col-7">
+                          <div class="flex items-center">
+                            <svg
+                              class="bi text-color-danger"
+                              width="32"
+                              height="32"
+                              fill="blue"
+                              style="width: 10px"
+                            >
+                              <use
+                                xlink:href="elementos/herramientas/images/bootstrap-icons.svg#circle-fill"
+                              />
+                            </svg>
+                            <h5 class="mb-0 ms-3 text-xl font-bold log">
+                              Indonesia
+                            </h5>
+                          </div>
+                        </div>
+                        <div class="col-5">
+                          <h5 class="mb-0 text-end text-xl font-bold log">
+                            1025
+                          </h5>
+                        </div>
+                        <div class="col-12">
+                          <div id="chart-indonesia"></div>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+                <div class="col-12 col-xl-8">
+                  <div class="card mb-9">
+                    <div class="card-header">
+                      <h4 class="text-xl font-bold mb-2 log">
+                        Latest Comments
+                      </h4>
+                    </div>
+                    <div class="card-body">
+                      <div class="table-responsive">
+                        <table class="table table-hover table-lg">
+                          <thead>
+                            <tr>
+                              <th class="text-start p-5-important color-icons">
+                                Name
+                              </th>
+                              <th class="text-start p-5-important color-icons">
+                                Comment
+                              </th>
+                            </tr>
+                          </thead>
+                          <tbody>
+                            <tr>
+                              <td class="col-3 p-5-important">
+                                <div class="flex items-center">
+                                  <div class="avatar avatar-md">
+                                    <img
+                                      src="elementos/herramientas/images/faces/5.jpg"
+                                    />
+                                  </div>
+                                  <p class="font-bold ms-3 mb-0 color-icons">
+                                    Si Cantik
+                                  </p>
+                                </div>
+                              </td>
+                              <td class="col-auto p-5-important">
+                                <p class="mb-0 color-icons">
+                                  Congratulations on your graduation!
+                                </p>
+                              </td>
+                            </tr>
+                            <tr>
+                              <td class="col-3 p-5-important">
+                                <div class="flex items-center">
+                                  <div class="avatar avatar-md">
+                                    <img
+                                      src="elementos/herramientas/images/faces/2.jpg"
+                                    />
+                                  </div>
+                                  <p class="font-bold ms-3 mb-0 color-icons">
+                                    Si Ganteng
+                                  </p>
+                                </div>
+                              </td>
+                              <td class="col-auto p-5-important">
+                                <p class="mb-0 color-icons">
+                                  Wow amazing design! Can you make another
+                                  tutorial for this design?
+                                </p>
+                              </td>
+                            </tr>
+                          </tbody>
+                        </table>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div class="col-12 col-lg-3">
+              <div class="card mb-9">
+                <div class="card-body">
+                  <div class="flex items-center">
+                    <div class="avatar avatar-xl">
+                      <img
+                        src="elementos/herramientas/images/faces/1.jpg"
+                        alt="Face 1"
+                      />
+                    </div>
+                    <div class="ms-4 name">
+                      <h5 class="text-xl font-bold log mb-2">John Duck</h5>
+                      <h6 class="text-muted mb-0">@johnducky</h6>
+                    </div>
+                  </div>
+                </div>
+              </div>
+              <div class="card mb-9">
+                <div class="card-header">
+                  <h4 class="text-xl font-bold log mb-2">Recent Messages</h4>
+                </div>
+                <div class="card-content pb-6">
+                  <div class="recent-message flex px-6 py-4">
+                    <div class="avatar avatar-lg">
+                      <img src="elementos/herramientas/images/faces/4.jpg" />
+                    </div>
+                    <div class="name ms-4">
+                      <h5 class="text-xl font-bold log">Hank Schrader</h5>
+                      <h6 class="text-muted mb-0 text-h6">@johnducky</h6>
+                    </div>
+                  </div>
+                  <div class="recent-message flex px-6 py-4">
+                    <div class="avatar avatar-lg">
+                      <img src="elementos/herramientas/images/faces/5.jpg" />
+                    </div>
+                    <div class="name ms-4">
+                      <h5 class="text-xl font-bold log">Dean Winchester</h5>
+                      <h6 class="text-muted mb-0 text-h6">@imdean</h6>
+                    </div>
+                  </div>
+                  <div class="recent-message flex px-6 py-4">
+                    <div class="avatar avatar-lg">
+                      <img src="elementos/herramientas/images/faces/1.jpg" />
+                    </div>
+                    <div class="name ms-4">
+                      <h5 class="text-xl font-bold log">John Dodol</h5>
+                      <h6 class="text-muted mb-0 text-h6">@dodoljohn</h6>
+                    </div>
+                  </div>
+                  <div class="px-6">
+                    <button class="boton-blue font-bold mt-3">
+                      Start Conversation
+                    </button>
+                  </div>
+                </div>
+              </div>
+              <div class="card mb-9">
+                <div class="card-header">
+                  <h4 class="text-xl font-bold log mb-2">Visitors Profile</h4>
+                </div>
+                <div class="card-body">
+                  <div id="chart-visitors-profile"></div>
+                </div>
+              </div>
+            </div>
+          </section>
+        </div>
+
+        <footer class="pt-2">
+          <div>
+            <div class="float-left">
+              <p class="text-muted">2023 &copy; Mazer</p>
+            </div>
+            <div class="float-right">
+              <p class="text-muted">
+                Crafted with
+                <span class="text-center">
+                  <svg
+                    class="w-5 inline-block"
+                    fill="#dc3545"
+                    height="100%"
+                    style="enable-background: new 0 0 512 512"
+                    version="1.1"
+                    viewBox="0 0 512 512"
+                    width="100%"
+                    xml:space="preserve"
+                    xmlns="http://www.w3.org/2000/svg"
+                    xmlns:xlink="http://www.w3.org/1999/xlink"
+                  >
+                    <g id="_x31_66_x2C__Heart_x2C__Love_x2C__Like_x2C__Twitter">
+                      <g>
+                        <path
+                          d="M365.4,59.628c60.56,0,109.6,49.03,109.6,109.47c0,109.47-109.6,171.8-219.06,281.271    C146.47,340.898,37,278.568,37,169.099c0-60.44,49.04-109.47,109.47-109.47c54.73,0,82.1,27.37,109.47,82.1    C283.3,86.999,310.67,59.628,365.4,59.628z"
+                        />
+                      </g>
+                    </g>
+                    <g id="Layer_1" />
+                  </svg>
+                </span>
+                by <a class="link" href="https://saugi.me">Saugi</a>
+              </p>
+            </div>
+          </div>
+        </footer>
+      </div>
+    </div>
+
+    <script src="https://cdn.jsdelivr.net/npm/apexcharts"></script>
+    <script src="elementos/static/dashboard.js"></script>
+  </body>
+</html>
+
+<script>
+  const themeToggle = document.getElementById("theme-toggle");
+  const html = document.getElementsByTagName("html")[0];
+  const body = document.getElementsByTagName("body")[0];
+  const sunMoon = document.getElementById("sun-moon");
+
+  themeToggle.addEventListener("click", () => {
+    if (html.classList.contains("dark")) {
+      html.classList.remove("dark");
+      html.classList.add("light");
+      body.classList.remove("bg-dark");
+      body.classList.add("bg-light");
+      localStorage.setItem("theme", "light");
+    } else {
+      html.classList.remove("light");
+      html.classList.add("dark");
+      body.classList.remove("bg-light");
+      body.classList.add("bg-dark");
+      localStorage.setItem("theme", "dark");
+    }
+  });
+
+  const savedTheme = localStorage.getItem("theme");
+
+  if (savedTheme === "dark") {
+    html.classList.add("dark");
+    body.classList.add("bg-dark");
+    sunMoon.classList.remove("sun");
+    sunMoon.classList.add("moon");
+    body.classList.add("dark-theme");
+  } else {
+    html.classList.add("light");
+    body.classList.add("bg-light");
+    sunMoon.classList.remove("moon");
+    sunMoon.classList.add("sun");
+    body.classList.remove("dark-theme");
+  }
+
+  document.addEventListener("DOMContentLoaded", function () {
+    const sidebarItems = document.querySelectorAll(".has-sub");
+
+    sidebarItems.forEach((sidebarItem) => {
+      const submenu = sidebarItem.querySelector(".submenu");
+
+      if (!submenu.classList.contains("active")) {
+        submenu.style.maxHeight = "0";
+      }
+
+      sidebarItem.addEventListener("click", function (event) {
+        const target = event.target;
+
+        if (target.closest(".submenu-item")) {
+          return;
+        }
+
+        event.preventDefault();
+
+        if (!submenu.classList.contains("active")) {
+          submenu.classList.add("active");
+          const height = submenu.scrollHeight;
+          submenu.style.maxHeight = `${height}px`;
+          submenu.style.transitionDuration = `${Math.round(
+            400 + height / 10
+          )}ms`;
+        } else {
+          const height = submenu.scrollHeight;
+          submenu.style.maxHeight = "0";
+          submenu.style.transition = "max-height 0.3s ease-out";
+          setTimeout(() => {
+            submenu.classList.remove("active");
+          }, 300);
+        }
+      });
+    });
+  });
+
+  function handleResize() {
+    const sidebarToggle = document.getElementById("sidebar-toggle");
+    const sidebar = document.getElementById("sidebar");
+    if (window.innerWidth <= 1200) {
+      sidebarToggle.classList.remove("hidden");
+      if (
+        sidebar.classList.contains("active") &&
+        window.devicePixelRatio >= 1.5
+      ) {
+        sidebar.classList.remove("active");
+      }
+    } else {
+      sidebarToggle.classList.add("hidden");
+      if (!sidebar.classList.contains("active")) {
+        sidebar.classList.add("active");
+      }
+    }
+  }
+
+  window.addEventListener("resize", handleResize);
+
+  document.addEventListener("DOMContentLoaded", () => {
+    const sidebar = document.getElementById("sidebar");
+    const sidebarToggle = document.getElementById("sidebar-toggle");
+    const sidebarHide = document.getElementById("sidebar-hide");
+
+    sidebarToggle.addEventListener("click", () => {
+      sidebar.classList.toggle("active");
+    });
+
+    sidebarHide.addEventListener("click", () => {
+      sidebar.classList.toggle("active");
+    });
+
+    handleResize();
+  });
+
+  function toggleTheme() {
+    const body = document.body;
+    const sunMoon = document.getElementById("sun-moon");
+    body.classList.toggle("dark-theme");
+
+    if (body.classList.contains("dark-theme")) {
+      sunMoon.classList.remove("sun");
+      sunMoon.classList.add("moon");
+      localStorage.setItem("theme", "dark");
+    } else {
+      sunMoon.classList.remove("moon");
+      sunMoon.classList.add("sun");
+      localStorage.setItem("theme", "light");
+    }
+  }
+</script>
